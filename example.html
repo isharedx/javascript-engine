@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example</title>
+    <script src="./template.js"></script>
+</head>
+<body>
+
+<div id="content">
+
+    <!--view[for={{data}} index={{id}} value={{item}}]-->
+    <view for="{{data}}" index="{{id}}" value="{{item}}">
+        <div>for:{{id}} {{item}}</div>
+    </view>
+
+    <!--view[if={{condition}}]-->
+    <view if="{{condition1}}">
+        <div>if:{{condition1}}</div>
+    </view>
+
+    <!--view[else-if={{condition}}]-->
+    <view else-if="{{condition2}}">
+        <div>else-if:{{condition2}}</div>
+    </view>
+
+    <!--view[else]-->
+    <view else="">
+        <div>else</div>
+    </view>
+
+    <!--嵌套模板-->
+    <view for="{{data}}" index="{{id}}" value="{{item}}">
+        <div>for:{{id}} {{item}}</div>
+        <view for="{{data}}" index="{{id}}" value="{{item}}">
+            <div>for:{{id}} {{item}}</div>
+        </view>
+        <view if="{{condition1}}">
+            <div>if:{{condition1}}</div>
+            <view for="{{data}}" index="{{id}}" value="{{item}}">
+                <div>for:{{id}} {{item}}</div>
+                <view for="{{data}}" index="{{id}}" value="{{item}}">
+                    <div>for:{{id}} {{item}}</div>
+                </view>
+                <view if="{{condition1}}">
+                    <div>if:{{condition1}}</div>
+                </view>
+                <view else-if="{{condition2}}">
+                    <div>else-if:{{condition2}}</div>
+                </view>
+                <view else=""></view>
+            </view>
+        </view>
+        <view else-if="{{condition2}}">
+            <div>else-if:{{condition2}}</div>
+            <view for="{{data}}" index="{{id}}" value="{{item}}">
+                <div>for:{{id}} {{item}}</div>
+                <view for="{{data}}" index="{{id}}" value="{{item}}">
+                    <div>for:{{id}} {{item}}</div>
+                </view>
+                <view if="{{condition1}}">
+                    <div>if:{{condition1}}</div>
+                </view>
+                <view else-if="{{condition2}}">
+                    <div>else-if:{{condition2}}</div>
+                </view>
+                <view else=""></view>
+            </view>
+        </view>
+        <view else="">
+            <div>else</div>
+            <view for="{{data}}" index="{{id}}" value="{{item}}">
+                <div>for:{{id}} {{item}}</div>
+                <view for="{{data}}" index="{{id}}" value="{{item}}">
+                    <div>for:{{id}} {{item}}</div>
+                </view>
+                <view if="{{condition1}}">
+                    <div>if:{{condition1}}</div>
+                </view>
+                <view else-if="{{condition2}}">
+                    <div>else-if:{{condition2}}</div>
+                </view>
+                <view else="">
+                    <div>else</div>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</div>
+
+<script>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// 测试
+
+    var tpl = document.getElementById('content').innerHTML;
+    var html = engine(tpl, {
+        data: ['v1', 'v2', 'v3'],
+        condition1: true,
+        condition2: true,
+    }).toHtml();
+    document.getElementById('content').innerHTML = html;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>
